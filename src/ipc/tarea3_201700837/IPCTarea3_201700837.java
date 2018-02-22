@@ -10,9 +10,10 @@ public class IPCTarea3_201700837 {
     
     
     public static void menuprincipal(){ //Menú Principal
-        int Opcion=0;
+        int Opcion=0; //esta es la variable que registra la opcion que escriba el usuario
+                      //esta declarada en todos los metodos
         do{
-           System.out.println("    [IPC1]Tarea3_20170083    \n \n" 
+           System.out.println("____[IPC1]Tarea3_201700837____\n" 
                     + " 1. Usuarios \n"
                     + " 2. Contador de dígitos\n "
                     + "3. Tres números de mayor a menor\n "
@@ -20,7 +21,7 @@ public class IPCTarea3_201700837 {
                     + "5. Salir\n");
            
            Scanner S = new Scanner(System.in);
-           Opcion = S.nextInt();
+           Opcion = S.nextInt(); //aqui le asigno el valor que ingrese el usuario a mi variable
            
         switch(Opcion){
             case 1: Usuarios();
@@ -41,6 +42,7 @@ public class IPCTarea3_201700837 {
         String arreglo[]=new String[5]; //un array para ingresar los usuarios de tamaño 5
         int Opcion=0;
          do{
+             System.out.println("____MENÚ USUARIOS____\n");
             System.out.println(" 1. Ingresar Usuarios \n"
                     + " 2. Mostrar Usuarios ascendente \n "
                     + "3. Mostrar Usuarios descendente\n "
@@ -56,17 +58,13 @@ public class IPCTarea3_201700837 {
              arreglo[0]=S.next();
              System.out.println("Ingrese segundo usuario:");
              arreglo[1]=S.next();
-             if(arreglo[0].equals(arreglo[1])){
+             if(arreglo[0].equals(arreglo[1])){ //aqui use if porque el while no me funcionaba
                  System.out.println("El usuario ya existe. Debe ingresar otro usuario: ");
                  arreglo[1]=S.next();
              }
-            /* while (arreglo[0].equals(arreglo[1])){
-              //   System.out.println("El usuario ya existe. Debe ingresar otro usuario: ");
-                // arreglo[1]=S.next();
-            */
              System.out.println("Ingrese tercer usuario:");
              arreglo[2]=S.next();
-             while (arreglo[2].equals(arreglo[0])||arreglo[2].equals(arreglo[1])){ 
+             while (arreglo[2].equals(arreglo[0])||arreglo[2].equals(arreglo[1])){  //comparo si el usario ingresado es igual a uno que ya fue ingresado
                  System.out.println("El usuario ya existe. Debe ingresar otro usuario: ");
                  arreglo[2]=S.next();
             } 
@@ -97,7 +95,7 @@ public class IPCTarea3_201700837 {
                             for(int l=0;l<=4;l++){
                                 System.out.println("Usuario No. "+ l + "   "+arreglo[l] );
                             }
-                // No pude hacer que empiece desde el 1 :/
+                // No pude hacer que empiece desde el 1 :(
             break;
             case 4: menuprincipal(); 
             break;
@@ -108,6 +106,7 @@ public class IPCTarea3_201700837 {
         int Opcion=0,cont, N=0;
         
         do{
+            System.out.println("____MENÚ CONTADOR DE DÍGITOS____\n");
             System.out.println("1. Ingresar número \n"
                     + "2. Mostrar número de dígitos \n"
                     + "3. Menú principal");
@@ -146,10 +145,11 @@ public class IPCTarea3_201700837 {
     public static void MayorMenor(){
       int Opcion=0;
       int A=0;
-      int B=0;
+      int B=0;//ESTAS SON LAS VARIABLES DE CADA NUMERO INGRESADO
       int C=0;
       
       do{
+          System.out.println("____MENÚ DE MAYOR A MENOR____\n");
           System.out.println("1. Ingresar números \n"
                     + "2. Mostrar ordenados \n"
                     + "3. Menú principal");
@@ -166,7 +166,7 @@ public class IPCTarea3_201700837 {
                   System.out.println("Ingrese el tercer número");
                   C=S.nextInt();        
               break;
-              case 2:
+              case 2://AQUI SE COMPARA CADA NUMERO SON 6 DIFERENTES POSIBLIDAD EN LAS QUE PUEDEN SER ORDENADOS
                   if(A>=B && A>=C && B>=C){
                       System.out.println("El orden de los números es \n: ");
                       System.out.println("El primero es: "+ A);
@@ -208,6 +208,8 @@ public class IPCTarea3_201700837 {
     }
     public static void Promedio(){
         int Opcion=0;
+        int suma=0;
+        int [][] matriz = new int [6][6];
         do{
            System.out.println(" 1. Ingresar ID de los estudiantes \n"
                     + " 2. Ingresar nota de cada estudiante \n "
@@ -216,26 +218,72 @@ public class IPCTarea3_201700837 {
            
            Scanner S = new Scanner(System.in);
            Opcion = S.nextInt();
-           int [][] matriz = new int [6][6];
+           
            
         switch(Opcion){
             case 1:
-                System.out.println("Ingrese el ID del primer estudiante: ");
-                matriz [0][0]=S.nextInt();
-                System.out.println("Ingrese el ID del segundo estudiante: ");
-                matriz [1][0]=S.nextInt();
-                System.out.println("Ingrese el ID del tercer estudiante: ");
-                matriz [2][0]=S.nextInt();
+                for(int i=0; i<6;i++){ //SE INGRESA LOS ID EN LA PRIMERA COLUMNA POR ESO SE QUEDA FIJA EN 0
+                    System.out.println("Ingrese el ID de los estudiantes: ");
+                matriz [0][i]=S.nextInt();
+                
+                for(int k=0; k<i;k++) //AQUI SE COMPARA QUE EL ID NO HAYA SIDO INGRESADO ANTES
+                    if(matriz[0][i]==matriz[0][k]){
+                        System.out.println("Ya ha sido registrado, por favor ingrese otro ID: ");
+                        matriz[0][i]=S.nextInt();
+                    }
+                }
+ 
             break;
-            case 2: Contador();
+            case 2: //SE INGRESA LAS NOTAS DE CADA ESTUDIANTE
+                for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del primer estudiante: ");
+                matriz [j][0]=S.nextInt();
+                }
+                for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del segundo estudiante: ");
+                matriz [j][1]=S.nextInt();
+                }
+                for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del tercer estudiante: ");
+                matriz [j][2]=S.nextInt();
+                }
+                 for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del cuarto estudiante: ");
+                matriz [j][3]=S.nextInt();
+                }
+                  for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del quinto estudiante: ");
+                matriz [j][4]=S.nextInt();
+                }
+                   for(int j=1; j<5;j++){
+                    System.out.println("Ingrese notas del sexto estudiante: ");
+                matriz [j][5]=S.nextInt();
+                
+                }
             break;
             case 3:
+              for(int i=0; i<6; i++){
+                          for(int j=1; j<5;j++){
+                          suma=suma+matriz[j][i];   //SE GUARDA Y SE SUMA CADA NOTA
+                          }
+                         matriz[5][i]=suma/4; // SE SACA EL PROMEDIO
+                         suma=0;
+               }
+                System.out.println("Las notas son:\n"); //SE IMPRIME LA MATRIZ
+                for(int f=0; f<6; f++){
+                    System.out.println();
+                    
+                        for(int c=0; c<6; c++){
+                            System.out.print(matriz[c][f] + "  ");
+                        }   
+                    }
+                System.out.println("\n");
             break;
             case 4: menuprincipal();
             break;
             default: System.out.println("Por favor elije una opción del 1 al 4 \n");
         } } while (Opcion != 4); 
         }
-    }
+    }//FIN--- ESPERO QUE NO HAYA SURGIDO NINGUN ERROR ._.
 
 
